@@ -1,0 +1,20 @@
+.dimension-container {
+    display: flex;
+    gap: 20px;
+    font-weight: 500;
+
+    &-item {
+        display: flex;
+        flex-direction: column;
+        width: 90px;
+
+        &__input {
+            text-align: right;
+
+            &_error {
+                text-align: right;
+                color: rgb(255, 0, 0);
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+export const listStr = "list";
+export const materialStr = "material";
+export const sizeStr = "size";
+export const lengthStr = "length";
+export const widthStr = "width";
+export const pipeStr = "pipe";
+export const frameStr = "frame";
+export const materialRu = "Материал";
+export const pipeRu = "Труба";
+export const frameRu = "Прочность покрытия";
+export const fixStr = "fix";
+export const listLength = 1;
