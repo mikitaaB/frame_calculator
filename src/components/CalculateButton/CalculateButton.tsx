@@ -2,50 +2,56 @@ import { FC, memo } from "react";
 import data from "../../data/data.json";
 import config from "../../data/config.json";
 import s from "./calculateButton.module.scss";
-import { fixStr, frameStr, listLength, listStr, pipeStr } from "../../utils/constants";
-import { PipeConfigInterface } from "../Calc/Calc";
-import { ResultDataType } from "../../App";
+import {
+	fixStr,
+	frameStr,
+	listLength,
+	listStr,
+	pipeStr,
+} from "../../constants";
+import {
+	CalculateButtonPropsType,
+	FixType,
+	ListType,
+	PipeConfigInterface,
+} from "../../types";
 
-type CalculateButtonPropsType = {
-	setResultData: (data: ResultDataType) => void,
-	setIsCalcBtnClick: (isClick: boolean) => void,
-	isError: boolean,
-	width: number,
-	length: number,
-	listItem: string,
-	material: string,
-	pipeKey: string,
-	frameKey: string
-}
-type ListType = {
-	type: string,
-	name: string,
-	material: string,
-	unit: string,
-	width: number,
-	price: number
-}
-type FixType = {
-	type: string,
-	key: string,
-	name: string,
-	value: number
-}
-
-export const CalculateButton: FC<CalculateButtonPropsType> = memo((props) => {
-	const { setResultData, setIsCalcBtnClick, isError, width, length, listItem, material, pipeKey, frameKey } = props;
+export const CalculateButton: FC<CalculateButtonPropsType> = memo(props => {
+	const {
+		setResultData,
+		setIsCalcBtnClick,
+		isError,
+		width,
+		length,
+		listItem,
+		material,
+		pipeKey,
+		frameKey,
+	} = props;
 
 	const onClickCaluclate = () => {
 		const area = width * length;
 
-		const listItemIndex: number = +listItem.slice(listItem.indexOf("-") + 1);
-		const list = data.filter(el => el.type === listStr && el.material === material)[listItemIndex] as ListType;
-		const listCount = list ? Math.ceil(area / (listLength * list.width)) : 0;
-		const listsPrice = list ? (listCount * list.price) : 0;
+		const listItemIndex: number = +listItem.slice(
+			listItem.indexOf("-") + 1
+		);
+		const list = data.filter(
+			el => el.type === listStr && el.material === material
+		)[listItemIndex] as ListType;
+		const listCount = list
+			? Math.ceil(area / (listLength * list.width))
+			: 0;
+		const listsPrice = list ? listCount * list.price : 0;
 
-		const frame = config.filter(el => el.type === frameStr).find(el => el.key === frameKey);
-		const pipe = data.filter(el => el.type === pipeStr).find(el => pipeKey === `${el.type}-${el.name}`) as PipeConfigInterface;
-		const pipeWidthM: number = pipe ? (pipe.width / 1000) : 0;
+		const frame = config
+			.filter(el => el.type === frameStr)
+			.find(el => el.key === frameKey);
+		const pipe = data
+			.filter(el => el.type === pipeStr)
+			.find(
+				el => pipeKey === `${el.type}-${el.name}`
+			) as PipeConfigInterface;
+		const pipeWidthM: number = pipe ? pipe.width / 1000 : 0;
 		let pipeCount = 0;
 		let pipePrice = 0;
 		let cell = 0;
@@ -54,13 +60,20 @@ export const CalculateButton: FC<CalculateButtonPropsType> = memo((props) => {
 			const horizontalCountPipe = Math.ceil(length / frame.step) + 1;
 			const vertitalCountPipe = Math.ceil(width / frame.step) + 1;
 			const carcas = 2;
-			pipeCount = Math.ceil(perimeter + ((length - (horizontalCountPipe * pipeWidthM)) * (horizontalCountPipe - carcas)) +
-				((width - (vertitalCountPipe * pipeWidthM)) * (vertitalCountPipe - carcas)));
+			pipeCount = Math.ceil(
+				perimeter +
+					(length - horizontalCountPipe * pipeWidthM) *
+						(horizontalCountPipe - carcas) +
+					(width - vertitalCountPipe * pipeWidthM) *
+						(vertitalCountPipe - carcas)
+			);
 			pipePrice = pipeCount * pipe.price;
 			cell = +(frame.step + pipeWidthM).toFixed(2);
 		}
 
-		const fix = config.filter(el => el.type === fixStr).find(el => el.key === material) as FixType;
+		const fix = config
+			.filter(el => el.type === fixStr)
+			.find(el => el.key === material) as FixType;
 		const fixEl = data.filter(el => el.type === fixStr)[0];
 		const fixCount = fix ? Math.ceil(area * fix.value) : 0;
 		const fixPrice = fix ? fixEl.price * fixCount : 0;
@@ -70,21 +83,34 @@ export const CalculateButton: FC<CalculateButtonPropsType> = memo((props) => {
 			area,
 			cell,
 			list: {
-				listName: list.name, listUnit: list.unit, listCount, listsPrice
+				listName: list.name,
+				listUnit: list.unit,
+				listCount,
+				listsPrice,
 			},
 			pipe: {
-				pipeName: pipe.name, pipeUnit: pipe.unit, pipeCount, pipePrice
+				pipeName: pipe.name,
+				pipeUnit: pipe.unit,
+				pipeCount,
+				pipePrice,
 			},
 			fix: {
-				fixName: fix.name, fixUnit: fixEl.unit, fixCount, fixPrice
-			}
-		})
-	}
+				fixName: fix.name,
+				fixUnit: fixEl.unit,
+				fixCount,
+				fixPrice,
+			},
+		});
+	};
 
 	return (
-		<button className={s["calculate-button"]} disabled={isError}
-			onClick={onClickCaluclate}>
+		<button
+			className={s["calculate-button"]}
+			disabled={isError}
+			onClick={onClickCaluclate}
+			type="button"
+		>
 			Вычислить
 		</button>
-	)
-})
+	);
+});

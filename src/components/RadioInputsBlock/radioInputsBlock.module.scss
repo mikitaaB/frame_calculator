@@ -9,6 +9,7 @@
 .input-radio-block {
 	display: flex;
 	gap: 15px;
+	align-items: center;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
