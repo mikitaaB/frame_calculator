@@ -1,0 +1,13 @@
+.table {
+	display: block;
+	padding: 0 15px;
+	border-spacing: 3px;
+
+	&__column,
+	&__row {
+		border: solid 1px #000000;
+		padding: 10px 35px;
+		text-align: center;
+		width: 100%;
+	}
+}

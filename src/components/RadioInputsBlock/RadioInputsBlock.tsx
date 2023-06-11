@@ -13,9 +13,10 @@ export const RadioInputsBlock: FC<RadioInputsBlockPropsType> = memo(props => {
 			<span>{`${label}:`}</span>
 			<div className={s["input-radio-block"]}>
 				{data.map((el, index) => (
-					<label key={el.key} htmlFor={`radio-${index}`}>
+					<label key={el.key} htmlFor={`radio-${el.key}-${index}`}>
 						<input
 							type="radio"
+							id={`radio-${el.key}-${index}`}
 							value={el.key}
 							checked={curValue === el.key}
 							onChange={onHandleMaterialInput}

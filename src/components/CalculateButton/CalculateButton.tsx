@@ -41,7 +41,7 @@ export const CalculateButton: FC<CalculateButtonPropsType> = memo(props => {
 		const listCount = list
 			? Math.ceil(area / (listLength * list.width))
 			: 0;
-		const listsPrice = list ? listCount * list.price : 0;
+		const listPrice = list ? listCount * list.price : 0;
 
 		const frame = config
 			.filter(el => el.type === frameStr)
@@ -83,22 +83,22 @@ export const CalculateButton: FC<CalculateButtonPropsType> = memo(props => {
 			area,
 			cell,
 			list: {
-				listName: list.name,
-				listUnit: list.unit,
-				listCount,
-				listsPrice,
+				name: list.name,
+				unit: list.unit,
+				count: listCount,
+				price: listPrice,
 			},
 			pipe: {
-				pipeName: pipe.name,
-				pipeUnit: pipe.unit,
-				pipeCount,
-				pipePrice,
+				name: pipe.name,
+				unit: pipe.unit,
+				count: pipeCount,
+				price: pipePrice,
 			},
 			fix: {
-				fixName: fix.name,
-				fixUnit: fixEl.unit,
-				fixCount,
-				fixPrice,
+				name: fix.name,
+				unit: fixEl.unit,
+				count: fixCount,
+				price: fixPrice,
 			},
 		});
 	};

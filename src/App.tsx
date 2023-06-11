@@ -9,22 +9,22 @@ const App = () => {
 		area: 0,
 		cell: 0,
 		list: {
-			listName: "",
-			listUnit: "",
-			listCount: 0,
-			listsPrice: 0,
+			name: "",
+			unit: "",
+			count: 0,
+			price: 0,
 		},
 		pipe: {
-			pipeName: "",
-			pipeUnit: "",
-			pipeCount: 0,
-			pipePrice: 0,
+			name: "",
+			unit: "",
+			count: 0,
+			price: 0,
 		},
 		fix: {
-			fixName: "",
-			fixUnit: "",
-			fixCount: 0,
-			fixPrice: 0,
+			name: "",
+			unit: "",
+			count: 0,
+			price: 0,
 		},
 	};
 	const [result, setResult] = useState<ResultDataType>(resData);
@@ -39,7 +39,7 @@ const App = () => {
 				setResultData={setResultData}
 				setIsCalcBtnClick={setIsCalcBtnClick}
 			/>
-			<Result result={result} isCalculateClick={isCalculateClick} />
+			{isCalculateClick && <Result result={result} />}
 		</div>
 	);
 };

@@ -1,29 +1,19 @@
+type ItemResType = {
+	name: string;
+	unit: string;
+	count: number;
+	price: number;
+};
+
+export type TableRowItemType = "list" | "pipe" | "fix";
+
 export type ResultDataType = {
 	area: number;
 	cell: number;
-	list: {
-		listName: string;
-		listUnit: string;
-		listCount: number;
-		listsPrice: number;
-	};
-	pipe: {
-		pipeName: string;
-		pipeUnit: string;
-		pipeCount: number;
-		pipePrice: number;
-	};
-	fix: {
-		fixName: string;
-		fixUnit: string;
-		fixCount: number;
-		fixPrice: number;
-	};
-};
+} & Record<TableRowItemType, ItemResType>;
 
 export type ResultPropsType = {
 	result: ResultDataType;
-	isCalculateClick: boolean;
 };
 
 export type MaterialType = {
@@ -31,10 +21,12 @@ export type MaterialType = {
 	key: string;
 	name: string;
 };
+
 export type ListDataType = {
 	title: string;
 	keyValue: string;
 };
+
 export type DimensionType = {
 	type: string;
 	key: string;
@@ -43,13 +35,13 @@ export type DimensionType = {
 	max: number;
 	step: number;
 };
+
 export type FrameType = {
 	type: string;
 	key: string;
 	name: string;
 	step: number;
 };
-
 export interface PipeConfigInterface {
 	type: string;
 	name: string;
